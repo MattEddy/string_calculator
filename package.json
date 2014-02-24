@@ -1,0 +1,9 @@
+{
+	"name": "string_calculator",
+	"author": "Matt Eddy",
+	"devDependencies": {
+		"coffee-script": "*",
+		"mocha": "*",
+		"chai": "*"
+	}
+}
