@@ -2,7 +2,7 @@
 
 Details [here](http://osherove.com/tdd-kata-1/)
 
-Installation: 
+Installation:
 
 ```
 npm install
