@@ -8,15 +8,28 @@
 
     Calculator.inputError = new TypeError("negative numbers are not allowed");
 
-    Calculator.prototype.add = function(numbers) {
-      var delimiter, delimiterController, num, sum, _i, _len;
-      if (numbers === "") {
+    Calculator.delimiter;
+
+    Calculator.numbers_string;
+
+    Calculator.prototype.add = function(numbers_string) {
+      var delimiterController;
+      this.numbers_string = numbers_string;
+      if (this.numbers_string === "") {
         return 0;
       }
-      delimiterController = new DelimiterController(numbers);
-      delimiter = delimiterController.parseDelimiter();
-      numbers = delimiterController.numbers;
-      numbers = numbers.split(RegExp("\\n|" + delimiter));
+      delimiterController = new DelimiterController(this.numbers_string);
+      this.delimiter = delimiterController.parseDelimiter();
+      this.numbers_string = delimiterController.numbers;
+      return this.sumArray(this.splitIntoArray());
+    };
+
+    Calculator.prototype.splitIntoArray = function(numbers_string) {
+      return this.numbers_string.split(RegExp("\\n|" + this.delimiter));
+    };
+
+    Calculator.prototype.sumArray = function(numbers) {
+      var num, sum, _i, _len;
       sum = 0;
       for (_i = 0, _len = numbers.length; _i < _len; _i++) {
         num = numbers[_i];
