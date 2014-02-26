@@ -1,20 +1,21 @@
 class Calculator
-	@inputError = new TypeError("negative numbers are not allowed")
-
 	add: (numbers_string) ->
 		return 0 if numbers_string is ""
-		numbers = new Parser(numbers_string).coerce(@stringToNumber)
-		sum = 0
-		for num in numbers
-			sum += num
-			@rejectNegatives() if num < 0
-		sum
-	
-	stringToNumber: (value) -> 
-		parseInt(value)
+		
+		new Parser(numbers_string)
+			.coerce(NaturalNumber.parse)
+			.reduce(@sum, 0)
 
-	rejectNegatives: ->
-		throw @inputError
+	sum: (acc, num) ->
+		acc + num
+
+class NaturalNumber
+	@inputError = new TypeError("negative numbers are not allowed")
+
+	@parse: (value) ->
+		number = parseInt(value)	
+		throw @inputError if number < 0
+		number
 
 class Parser
 	delimiter: ","
